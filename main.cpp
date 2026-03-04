@@ -40,6 +40,16 @@ private:
     int _y;
 };
 
+void functionCompareX(point2D point1, point2D point2) {
+    if (point1.getX() > point2.getX()) {
+        cout << "point2 ближе, чем point1" << endl;
+    } else if (point1.getX() < point2.getX()) {
+        cout << "point1 ближе, чем point2" << endl;
+    } else if (point1.getX() == point2.getX()) {
+        cout << "point1 и point2 расположены одинаково" << endl;
+    }
+}
+
 int main() {
     int x, y;
 
