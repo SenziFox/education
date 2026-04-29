@@ -39,6 +39,26 @@ std::ostream& operator<<(std::ostream& os, const myClass<myType>& obj) {
     return os;
 }
 
+class mySetIntClass {
+private:
+    int _size;
+    int _data[100];
+public:
+    mySetIntClass() {
+        _size = 0;
+    };
+    void pushElement(int value) {
+        for (int i = 0; i < _size; ++i) {
+            if (_data[i] == value) {
+                std::cout << "Element already exists: " << value << std::endl;
+                return;
+            }
+        }
+        _data[_size] = value;
+        _size++;
+    }
+};
+
 int main() {
     myClass<int> Obj1(5);
     myClass<double> Obj2(3.14);
@@ -55,6 +75,11 @@ int main() {
     std::cout << Obj1 << std::endl;
     std::cout << Obj2 << std::endl;
     std::cout << Obj3 << std::endl;
+
+    mySetIntClass mySet;
+    mySet.pushElement(5);
+    mySet.pushElement(10);
+    mySet.pushElement(5);
 
     return 0;
 }
