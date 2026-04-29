@@ -48,14 +48,26 @@ public:
         _size = 0;
     };
     void pushElement(int value) {
-        for (int i = 0; i < _size; ++i) {
-            if (_data[i] == value) {
-                std::cout << "Element already exists: " << value << std::endl;
-                return;
+        if (_size < 100){
+            for (int i = 0; i < _size; ++i) {
+                if (_data[i] == value) {
+                    std::cout << "Element already exists: " << value << std::endl;
+                    return;
+                }
             }
+            _data[_size] = value;
+            _size++;
+        } else {
+            std::cout << "Set is full. Cannot add more elements." << std::endl;
+            return;
+        }   
+    }
+    void printElements() {
+        std::cout << "Elements in the set: ";
+        for (int i = 0; i < _size; ++i) {
+            std::cout << _data[i] << " ";
         }
-        _data[_size] = value;
-        _size++;
+        std::cout << std::endl;
     }
 };
 
@@ -80,6 +92,8 @@ int main() {
     mySet.pushElement(5);
     mySet.pushElement(10);
     mySet.pushElement(5);
+
+    mySet.printElements();
 
     return 0;
 }
