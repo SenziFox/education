@@ -18,6 +18,11 @@ public:
     void printObj() const;
 };
 
+std::ostream& operator<<(std::ostream& os, const baseEngineClass& obj) {
+    os << " Speed=" << obj.getSpeed() << " Power=" << obj.getPower();
+    return os;
+}
+
 baseEngineClass::baseEngineClass() : _speed(0), _power(0) {
     std::cout << std::endl << "Конструктор базового класса по умолчанию" << std::endl;
 }
@@ -43,7 +48,7 @@ int baseEngineClass::getPower() const {
 }
 
 void baseEngineClass::printObj() const {
-    std::cout << "Speed: " << _speed << ", Power: " << _power << std::endl;
+    std::cout << *this << std::endl;
 }
 
 class busClass : public baseEngineClass {
@@ -59,6 +64,12 @@ public:
     
     void printObj() const;
 };
+
+std::ostream& operator<<(std::ostream& os, const busClass& obj) {
+    os << static_cast<const baseEngineClass&>(obj)
+       << " Passengers=" << obj.getPass();
+    return os;
+}
 
 busClass::busClass() : baseEngineClass(), _pass(0) {
     std::cout << "Конструктор класса автобуса по умолчанию" << std::endl;
@@ -77,8 +88,7 @@ int busClass::getPass() const {
 }
 
 void busClass::printObj() const {
-    baseEngineClass::printObj();
-    std::cout << "Passengers: " << _pass << std::endl;
+    std::cout << *this << std::endl;
 }
 
 class cargoClass : public baseEngineClass {
@@ -94,6 +104,12 @@ public:
 
     void printObj() const;
 };
+
+std::ostream& operator<<(std::ostream& os, const cargoClass& obj) {
+    os << static_cast<const baseEngineClass&>(obj)
+       << " Weight=" << obj.getWeight();
+    return os;
+}
 
 cargoClass::cargoClass() : baseEngineClass(), _weight(0) {
     std::cout << "Конструктор класса грузовика по умолчанию" << std::endl;
@@ -112,39 +128,38 @@ int cargoClass::getWeight() const {
 }
 
 void cargoClass::printObj() const {
-    baseEngineClass::printObj();
-    std::cout << "Weight: " << _weight << std::endl;
+    std::cout << *this << std::endl;
 }
 
 int main() {
     baseEngineClass myEngine1(150, 300);
-    myEngine1.printObj();
+    std::cout << myEngine1 << std::endl;
 
     baseEngineClass myEngine2;
     myEngine2.setSpeed(120);
     myEngine2.setPower(250);
-    myEngine2.printObj();
+    std::cout << myEngine2 << std::endl;
 
     busClass myBus1(50);
     myBus1.setSpeed(100);
     myBus1.setPower(200);
-    myBus1.printObj();
+    std::cout << myBus1 << std::endl;
 
     busClass myBus2;
     myBus2.setPass(40);
     myBus2.setSpeed(80);
     myBus2.setPower(150);
-    myBus2.printObj();
+    std::cout << myBus2 << std::endl;
 
     cargoClass myCargo1(100);
     myCargo1.setSpeed(90);
     myCargo1.setPower(180);
-    myCargo1.printObj();
+    std::cout << myCargo1 << std::endl;
 
     cargoClass myCargo2;
     myCargo2.setSpeed(70);
     myCargo2.setPower(120);
     myCargo2.setWeight(200);
-    myCargo2.printObj();
+    std::cout << myCargo2 << std::endl;
     return 0;
 }
