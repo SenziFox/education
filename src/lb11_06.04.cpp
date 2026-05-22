@@ -1,3 +1,6 @@
+// lb11_06.04.cpp
+// https://github.com/SenziFox/education/tree/main/src
+
 #include <iostream>
 
 class baseEngineClass {
